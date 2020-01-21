@@ -10,6 +10,7 @@ import yang.postman.community.dto.GithubUser;
 import yang.postman.community.provideer.GithubProvider;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author : yang9
@@ -32,7 +33,8 @@ public class AuthorizeController {
 
     @RequestMapping("/callback")
     public String callback(@RequestParam("code")String code  ,
-                           @RequestParam("state")String state){
+                           @RequestParam("state")String state,
+                           HttpServletRequest request){
         AccessTonkenDTO accessTonkenDTO=new AccessTonkenDTO();
         accessTonkenDTO.setClient_id(clientId);
         accessTonkenDTO.setClient_secret(clientSecret);
@@ -42,6 +44,10 @@ public class AuthorizeController {
         String accessTonken = githubProvider.getAccessToken(accessTonkenDTO);
         GithubUser user =githubProvider.getUser(accessTonken);
         System.out.println(user.getName()+user.getBio()+user.getId());
-        return "index";
+        if(user!=null){
+            //登录成功
+            request.getSession().setAttribute("user",user);
+        }
+        return "redirect:/index";
     }
 }
