@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import yang.postman.community.dto.AccessTonkenDTO;
 import yang.postman.community.dto.GithubUser;
+import yang.postman.community.mapper.UserMapper;
+import yang.postman.community.model.User;
 import yang.postman.community.provideer.GithubProvider;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * @author : yang9
@@ -19,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class AuthorizeController {
-    @Autowired
+    @Resource
     private GithubProvider githubProvider;
     /**
      * 读取配置内容
@@ -30,7 +33,8 @@ public class AuthorizeController {
     private String clientSecret;
     @Value("${github.client.Redirect_uri}")
     private String redorectUri;
-
+    @Resource
+    private UserMapper userMapper;
     @RequestMapping("/callback")
     public String callback(@RequestParam("code")String code  ,
                            @RequestParam("state")String state,
@@ -42,11 +46,13 @@ public class AuthorizeController {
         accessTonkenDTO.setState(state);
         accessTonkenDTO.setCode(code);
         String accessTonken = githubProvider.getAccessToken(accessTonkenDTO);
-        GithubUser user =githubProvider.getUser(accessTonken);
-        System.out.println(user.getName()+user.getBio()+user.getId());
-        if(user!=null){
+        GithubUser githubUser =githubProvider.getUser(accessTonken);
+        System.out.println(githubUser.getName()+githubUser.getBio()+githubUser.getId());
+        if (githubUser != null) {
+            User user = new User(null, githubUser.getName(), String.valueOf(githubUser.getId()), UUID.randomUUID().toString(), System.currentTimeMillis(), System.currentTimeMillis());
+            userMapper.insert(user);
             //登录成功
-            request.getSession().setAttribute("user",user);
+            request.getSession().setAttribute("user", githubUser);
         }
         return "redirect:/index";
     }

@@ -113,3 +113,31 @@ git init    #初始一个不是git的项目,变成git项目
 :q -不保存文件，退出 vim
 :q! -不保存文件，强制退出 vim
 :e! -放弃所有修改，从上次保存文件开始再编辑
+
+h2 登录问题
+h2-user
+    在database 中h2数据库 右键打开控制台 console
+    
+       create user sa password  '123';--创建用户
+       alter user sa admin true;--修改权限
+       alter user SA set password '123'--修改用户密码
+
+mysql url 8.19
+url=jdbc:mysql://localhost:3306/youdatabasename?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+
+
+##脚本
+``` h2 sql
+create table USER
+(
+	ID INT auto_increment,
+	NAME VARCHAR(255),
+	ACCOUNT_ID VARCHAR(255),
+	TOKEN VARCHAR(255),
+	GMT_CREATE LONG,
+	GMT_MODIFIED LONG
+);
+
+
+```
