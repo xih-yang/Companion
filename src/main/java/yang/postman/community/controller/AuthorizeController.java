@@ -12,7 +12,9 @@ import yang.postman.community.model.User;
 import yang.postman.community.provideer.GithubProvider;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -38,7 +40,8 @@ public class AuthorizeController {
     @RequestMapping("/callback")
     public String callback(@RequestParam("code")String code  ,
                            @RequestParam("state")String state,
-                           HttpServletRequest request){
+                          // HttpServletRequest request,
+                           HttpServletResponse response){
         AccessTonkenDTO accessTonkenDTO=new AccessTonkenDTO();
         accessTonkenDTO.setClient_id(clientId);
         accessTonkenDTO.setClient_secret(clientSecret);
@@ -52,7 +55,8 @@ public class AuthorizeController {
             User user = new User(null, githubUser.getName(), String.valueOf(githubUser.getId()), UUID.randomUUID().toString(), System.currentTimeMillis(), System.currentTimeMillis());
             userMapper.insert(user);
             //登录成功
-            request.getSession().setAttribute("user", githubUser);
+            response.addCookie(new Cookie("token",user.getToken()));
+           // request.getSession().setAttribute("user", githubUser);
         }
         return "redirect:/index";
     }
