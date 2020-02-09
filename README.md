@@ -128,7 +128,7 @@ url=jdbc:mysql://localhost:3306/youdatabasename?useUnicode=true&characterEncodin
 
 
 ##脚本
-``` h2 sql
+``` sql
 create table USER
 (
 	ID INT auto_increment,
@@ -141,3 +141,28 @@ create table USER
 
 
 ```
+pom.xml 中flyway - h2 数据库 , mysql 正在使用
+```pom.xml
+ <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.2.2</version>
+                <configuration>
+                    <url>jdbc:h2:~/myCommunity</url>
+                    <user>sa</user>
+                    <password>123</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>1.4.197</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+```
+mvn flyway:migrate //开始迁移 可在idea 右侧 maven中找plugins插件
