@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Description : yang.postman.community.controller
  */
 @Controller
-public class indexController {
+public class IndexController {
     @Resource
     private UserMapper userMapper;
 
