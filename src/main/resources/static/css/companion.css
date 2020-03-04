@@ -1,0 +1,21 @@
+/**
+    body
+ */
+body{
+    background-color: #efefef;
+}
+
+/**
+    内容
+ */
+.main{
+    margin: 30px;
+    background-color: white;
+}
+/**
+    .btn_publish
+ */
+.btn_publish{
+    margin-bottom: 15px;
+    float: right;
+}
