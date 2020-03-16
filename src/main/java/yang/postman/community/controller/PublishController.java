@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description : yang.postman.community.controller
  */
 @Controller
-public class PublishControoler {
+public class PublishController {
     @Resource
     private UserMapper userMapper;
     @Resource
