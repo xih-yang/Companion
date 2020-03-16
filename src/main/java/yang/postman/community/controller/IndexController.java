@@ -22,7 +22,7 @@ public class IndexController {
 
     @RequestMapping("index")
     public String index(HttpServletRequest request){
-        System.out.println("in index.comtroller");
+        System.out.println("in index.controller");
         Cookie[] cookies =request.getCookies();
         for (Cookie cookie : cookies) {
             if(cookie.getName().equals("token")){

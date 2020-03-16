@@ -1,4 +1,4 @@
-
+create schema if not exists `schemas` collate utf8_general_ci;
 create table user
 (
 	id int auto_increment comment 'id'
