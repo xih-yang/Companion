@@ -50,9 +50,8 @@ public class AuthorizeController {
         accessTonkenDTO.setCode(code);
         String accessTonken = githubProvider.getAccessToken(accessTonkenDTO);
         GithubUser githubUser =githubProvider.getUser(accessTonken);
-        System.out.println(githubUser.getName()+githubUser.getBio()+githubUser.getId());
         if (githubUser != null&&githubUser.getId()!=null) {//信息不完整时,空白昵称
-            User user = new User(null, githubUser.getName(), String.valueOf(githubUser.getId()), UUID.randomUUID().toString(), System.currentTimeMillis(), System.currentTimeMillis());
+            User user = new User(null, githubUser.getName(), String.valueOf(githubUser.getId()), UUID.randomUUID().toString(), System.currentTimeMillis(), System.currentTimeMillis(),githubUser.getAvatar_url());
             userMapper.insert(user);
             //登录成功
             response.addCookie(new Cookie("token",user.getToken()));

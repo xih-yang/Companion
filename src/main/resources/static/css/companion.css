@@ -19,3 +19,23 @@ body{
     margin-bottom: 15px;
     float: right;
 }
+/**
+问题列表图片
+ */
+.img-rounded{
+    height: 40px;
+    width: 40px;
+}
+/**
+问题描述
+ */
+.text_desc{
+    font-size: 12px;
+    color: #999;
+}
+/**
+index问题列表_行Div
+ */
+.questionListRow{
+    padding: 4px 0 4px 5px;
+}

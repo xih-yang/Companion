@@ -78,7 +78,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
-
+        <!--lombok支持 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
@@ -103,7 +109,7 @@
                     <password>accp</password>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
                     <url>jdbc:mysql://127.0.0.1:3306/mycommunity?serverTimezone=UTC</url>
-                     <baselineOnMigrate>true</baselineOnMigrate>
+                    <baselineOnMigrate>true</baselineOnMigrate>
                     <!-- //sql脚本位置，flyway会自动去找到这个目录并且执行里面的sql脚本 -->
                     <locations>classpath:db/migration/</locations>
                 </configuration>

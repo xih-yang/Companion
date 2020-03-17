@@ -1,19 +1,15 @@
-package yang.postman.community.model;
+package yang.postman.community.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.ibatis.annotations.Lang;
+import yang.postman.community.model.User;
 
 /**
  * @author : yang9
- * @Date : 2020/3/16 11:08
- * @Description : yang.postman.community.model 问题
+ * @Date : 2020/3/17 20:29
+ * @Description : yang.postman.community.dto
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Question {
+public class QuestionDTO {
     private Integer id;
     private String title;//标题
     private String description;//问题详情
@@ -24,4 +20,5 @@ public class Question {
     private Integer view_count;//浏览
     private Integer like_count;//喜欢
     private String tag;//标签
+    private User user;//user对象 1对1
 }
